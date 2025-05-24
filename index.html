@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo Options Pricing Simulator</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Monte Carlo Options Pricing Simulator</h1>
+            <div class="theme-toggle">
+                <button id="darkModeToggle">Toggle Dark Mode</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="input-panel">
+                <div class="option-params">
+                    <h2>Option Parameters</h2>
+                    <div class="param-group">
+                        <label for="optionType">Option Type:</label>
+                        <select id="optionType">
+                            <option value="asian-call">Asian Call</option>
+                            <option value="asian-put">Asian Put</option>
+                            <option value="barrier-up-out">Barrier Up-and-Out</option>
+                            <option value="barrier-down-in">Barrier Down-and-In</option>
+                            <option value="lookback-fixed">Lookback Fixed</option>
+                            <option value="lookback-floating">Lookback Floating</option>
+                        </select>
+                    </div>
+                    <div class="param-group">
+                        <label for="spot">Spot Price (S):</label>
+                        <input type="number" id="spot" value="100">
+                    </div>
+                    <div class="param-group">
+                        <label for="strike">Strike Price (K):</label>
+                        <input type="number" id="strike" value="100">
+                    </div>
+                    <div class="param-group">
+                        <label for="volatility">Volatility (σ):</label>
+                        <input type="number" id="volatility" value="0.2" step="0.01">
+                    </div>
+                    <div class="param-group">
+                        <label for="riskFreeRate">Risk-Free Rate (r):</label>
+                        <input type="number" id="riskFreeRate" value="0.05" step="0.01">
+                    </div>
+                    <div class="param-group">
+                        <label for="maturity">Time to Maturity (T):</label>
+                        <input type="number" id="maturity" value="1" step="0.1">
+                    </div>
+                    <div class="param-group">
+                        <label for="steps">Time Steps:</label>
+                        <input type="number" id="steps" value="252">
+                    </div>
+                    <div class="param-group">
+                        <label for="simulations">Number of Simulations:</label>
+                        <input type="number" id="simulations" value="10000">
+                    </div>
+                </div>
+
+                <div class="advanced-settings">
+                    <h2>Advanced Settings</h2>
+                    <div class="param-group">
+                        <label for="useAntithetic">Use Antithetic Variates:</label>
+                        <input type="checkbox" id="useAntithetic" checked>
+                    </div>
+                    <div class="param-group">
+                        <label for="useStratified">Use Stratified Sampling:</label>
+                        <input type="checkbox" id="useStratified" checked>
+                    </div>
+                    <div class="param-group">
+                        <label for="jumpDiffusion">Enable Jump Diffusion:</label>
+                        <input type="checkbox" id="jumpDiffusion">
+                    </div>
+                </div>
+
+                <button id="calculateButton" class="primary-button">Calculate Price</button>
+            </div>
+
+            <div class="results-panel">
+                <div class="price-results">
+                    <h2>Pricing Results</h2>
+                    <div id="optionPrice" class="result-box"></div>
+                    <div id="confidenceInterval" class="result-box"></div>
+                </div>
+
+                <div class="visualization-panel">
+                    <div class="chart-container">
+                        <div id="pathChart" class="chart"></div>
+                        <div id="payoffHistogram" class="chart"></div>
+                    </div>
+                </div>
+
+                <div class="greeks-panel">
+                    <h2>Greeks</h2>
+                    <div class="greeks-grid">
+                        <div class="greek-box" id="delta"></div>
+                        <div class="greek-box" id="gamma"></div>
+                        <div class="greek-box" id="theta"></div>
+                        <div class="greek-box" id="vega"></div>
+                        <div class="greek-box" id="rho"></div>
+                    </div>
+                </div>
+
+                <div class="risk-metrics">
+                    <h2>Risk Metrics</h2>
+                    <div class="metrics-grid">
+                        <div class="metric-box" id="var"></div>
+                        <div class="metric-box" id="sharpeRatio"></div>
+                        <div class="metric-box" id="sortinoRatio"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/index.js"></script>
+</body>
+</html> 
